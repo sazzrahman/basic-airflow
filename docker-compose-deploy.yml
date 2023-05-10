@@ -1,0 +1,19 @@
+version: '2.1'
+
+services:
+  airflow:
+    build: './docker/airflow'
+    restart: always
+    container_name: airflow
+    env_file:
+      - .env
+    volumes:
+      - ./mnt/airflow/dags:/opt/airflow/dags
+    ports:
+      - 80:8080
+
+    healthcheck:
+      test: [ "CMD", "nc", "-z", "airflow", "8080" ]
+      interval: 10s
+      timeout: 45s
+      retries: 10
