@@ -4,7 +4,7 @@ services:
   postgres:
     image: postgres:15.2-alpine
     restart: always
-    container_name: postgres
+    container_name: postgres-basic
     volumes:
       - airflow-db-data:/var/lib/postgresql/data
     logging:
@@ -35,7 +35,7 @@ services:
   airflow:
     build: '.'
     restart: always
-    container_name: airflow
+    container_name: airflow-basic
     env_file:
       - .env
     volumes:
@@ -51,4 +51,4 @@ services:
     depends_on:
       - postgres
 volumes:
-  airflow-db-data:
+  airflowbasic-db-data:
